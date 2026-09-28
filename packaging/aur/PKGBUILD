@@ -1,32 +1,30 @@
-# PKGBUILD (SuperScience Blue, packaging/local)
-# Created: 2026-09-28 04:55 | Last change: 2026-09-28 05:45 — .install now shared from packaging/aur/.
-# styles libadwaita apps automatically; pkgrel 2.
-# Builds the package from this source tree (for testing before a release).
-# The AUR PKGBUILD installs the same files from a GitHub release instead.
-# Usage, from this folder: makepkg -si
+# PKGBUILD (SuperScience Blue, packaging/aur)
+# Created: 2026-09-28 05:45 | Last change: 2026-09-28 05:45 — first version.
+# The AUR package: installs the theme from a GitHub release. packaging/local/PKGBUILD
+# installs the same files from the working tree, for testing before a release.
 #
 # Maintainer: Robert Muncrief <siflaj@searingtruth.com>
 
 pkgname=superscience-blue-gtk-theme
 pkgver=1.0.0
-pkgrel=2
+pkgrel=1
 pkgdesc="A clean blue theme for GTK2, GTK3, GTK4/libadwaita and Xfwm4"
 arch=('any')
 url="https://github.com/muncrief/superscience-blue"
 license=('GPL-3.0-or-later')
 optdepends=('gtk-engine-murrine: GTK2 apps'
             'gnome-themes-extra: GTK2 apps (Adwaita engine)')
-install="../aur/$pkgname.install"
-source=()
+install="$pkgname.install"
+source=("$pkgname-$pkgver.tar.gz::$url/archive/refs/tags/v$pkgver.tar.gz")
+sha256sums=('SKIP')
 
 package()
 {
-    local root="$startdir/../.."
+    local root="$srcdir/superscience-blue-$pkgver"
     local dest="$pkgdir/usr/share/themes/SuperScience Blue"
 
     install -d "$dest"
     cp -r --no-preserve=mode,ownership "$root/theme/." "$dest/"
-    # g-s: the source folders may be setgid (they are in Storage); installed ones mustn't be
     find "$dest" -type d -exec chmod u=rwx,go=rx,g-s {} +
     find "$dest" -type f -exec chmod 644 {} +
 
