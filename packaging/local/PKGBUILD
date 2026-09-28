@@ -4,7 +4,7 @@
 # The AUR PKGBUILD installs the same files from a GitHub release instead.
 # Usage, from this folder: makepkg -si
 #
-# Maintainer: Robert Muncrief <rmuncrief@humanavance.com>
+# Maintainer: Robert Muncrief <siflaj@searingtruth.com>
 
 pkgname=superscience-blue-gtk-theme
 pkgver=1.0.0
