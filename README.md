@@ -1,11 +1,15 @@
 <!-- README.md (SuperScience Blue) -->
-<!-- Created: 2026-09-28 04:50 | Last change: 2026-09-28 05:18 — libadwaita styling is automatic at login. -->
+<!-- Created: 2026-09-28 04:50 | Last change: 2026-09-28 05:45 — screenshots added. -->
 
 # SuperScience Blue
 
 A clean, light blue desktop theme for Linux, covering GTK2, GTK3, GTK4
 (including libadwaita apps) and the Xfwm4 window manager. Developed and used
 daily on Xfce.
+
+![Xfwm4 window over a GTK3 app](screenshots/overlap-xfwm4.png)
+
+![A libadwaita app (Pamac)](screenshots/pamac-1.png)
 
 ## What's included
 
