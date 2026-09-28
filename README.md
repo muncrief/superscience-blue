@@ -1,5 +1,5 @@
 <!-- README.md (SuperScience Blue) -->
-<!-- Created: 2026-09-28 04:50 | Last change: 2026-09-28 05:45 — screenshots added. -->
+<!-- Created: 2026-09-28 04:50 | Last change: 2026-09-28 05:55 — install from GitHub until the AUR package exists. -->
 
 # SuperScience Blue
 
@@ -24,13 +24,16 @@ daily on Xfce.
 
 ## Install
 
-### Arch Linux (AUR)
+### Arch Linux
+
+The AUR package `superscience-blue-gtk-theme` is coming soon. Until then,
+build the same package directly from this repository:
 
 ```
-yay -S superscience-blue-gtk-theme
+git clone https://github.com/muncrief/superscience-blue
+cd superscience-blue/packaging/aur
+makepkg -si
 ```
-
-(or any other AUR helper, or `git clone` the AUR package and run `makepkg -si`).
 
 ### Other distributions
 
