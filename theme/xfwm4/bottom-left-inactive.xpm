@@ -1,0 +1,8 @@
+/* XPM */
+static char * bottom_left_inactive_blue_xpm[] = {
+"2 2 3 1",
+" 	c None",
+".	c #6993B6",
+"+	c #0063B1",
+".+",
+".."};

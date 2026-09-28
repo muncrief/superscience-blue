@@ -1,0 +1,128 @@
+/* supplement.css (SuperScience Blue, tools) */
+/* Created: 2026-09-27 | Last change: 2026-09-28 04:40 — header + license line added. Appended to gtk-4.0/gtk.css by build.sh. */
+/* SPDX-License-Identifier: GPL-3.0-or-later */
+
+/* ================================================================
+   GTK4-ONLY ADDITIONS
+   Widgets and names that exist in GTK4 but not GTK3. GTK4 has no
+   built-in fallback for a custom theme, so anything not styled here
+   or above is drawn unstyled.
+   ================================================================ */
+
+/* Standard GTK4 / libadwaita color names, mapped to this theme's
+   colors, for GTK4 apps whose own CSS refers to them. */
+@define-color accent_color @theme_selected_bg_color;
+@define-color accent_bg_color @theme_selected_bg_color;
+@define-color accent_fg_color @theme_selected_fg_color;
+@define-color window_bg_color @theme_bg_color;
+@define-color window_fg_color @theme_fg_color;
+@define-color view_bg_color @theme_base_color;
+@define-color view_fg_color @theme_text_color;
+@define-color headerbar_bg_color @wm_bg;
+@define-color headerbar_fg_color @wm_title;
+@define-color headerbar_border_color @wm_highlight;
+@define-color headerbar_backdrop_color @wm_bg_unfocused;
+@define-color card_bg_color @theme_base_color;
+@define-color card_fg_color @theme_text_color;
+@define-color popover_bg_color @theme_bg_color;
+@define-color popover_fg_color @theme_fg_color;
+@define-color dialog_bg_color @theme_bg_color;
+@define-color dialog_fg_color @theme_fg_color;
+@define-color sidebar_bg_color @theme_bg_color;
+@define-color sidebar_fg_color @theme_fg_color;
+@define-color destructive_bg_color @error_color;
+@define-color destructive_fg_color #ffffff;
+@define-color success_bg_color @success_color;
+@define-color warning_bg_color @warning_color;
+@define-color error_bg_color @error_color;
+
+/* Grid views (GTK4 icon grids, e.g. file choosers) */
+gridview > child:selected
+{
+  background-color: @theme_selected_bg_color;
+  color: @theme_selected_fg_color;
+}
+
+gridview > child:hover:not(:selected)
+{
+  background-color: alpha(@theme_selected_bg_color, 0.15);
+}
+
+/* Column views: header buttons and cells */
+columnview > header > button
+{
+  padding: 2px 6px;
+  border-style: none solid solid none;
+  border-width: 1px;
+  border-color: @borders;
+  background-color: @theme_base_color;
+  color: @theme_fg_color;
+}
+
+columnview > listview > row:selected,
+columnview > listview > row:selected > cell
+{
+  background-color: @theme_selected_bg_color;
+  color: @theme_selected_fg_color;
+}
+
+/* Popover menus: item hover and accelerator text */
+popover.menu modelbutton:hover,
+popover.menu modelbutton:selected
+{
+  background-color: @theme_selected_bg_color;
+  color: @theme_selected_fg_color;
+}
+
+popover.menu accelerator
+{
+  color: alpha(currentColor, 0.55);
+}
+
+/* Drop-down list rows */
+dropdown popover listview > row:selected
+{
+  background-color: @theme_selected_bg_color;
+  color: @theme_selected_fg_color;
+}
+
+/* Calendar (GTK4 structure: header + grid of labels) */
+calendar > grid > label.day-number:selected
+{
+  border-radius: 3px;
+  background-color: @theme_selected_bg_color;
+  color: @theme_selected_fg_color;
+}
+
+calendar > grid > label.day-number.other-month
+{
+  color: alpha(currentColor, 0.4);
+}
+
+calendar > grid > label.today
+{
+  box-shadow: inset 0 -2px @theme_selected_bg_color;
+}
+
+/* Slider fill: GTK3 used negative margins to tuck the fill under the
+   slider ends. GTK4 sizes the fill from the value and rejects negative
+   sizes, so the margins are reset here. */
+scale.horizontal > trough > highlight,
+scale.horizontal > trough > fill,
+scale.vertical > trough > highlight,
+scale.vertical > trough > fill
+{
+  margin: 0;
+}
+
+/* Checked and pressed buttons: the GTK3 rule
+   "button:active:hover, button:checked { color: #ffffff; }" put white
+   text on the light grey checked background (unreadable, e.g.
+   HandBrake's selected tab). Plain checked/pressed buttons keep dark
+   text; coloured variants (headerbar, suggested-action) have more
+   specific rules and are unaffected. */
+button:checked,
+button:active:hover
+{
+  color: #3b3e46;
+}

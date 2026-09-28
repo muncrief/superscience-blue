@@ -1,0 +1,97 @@
+#Whisker Menu Theme
+
+#
+# -------
+# Sidebar
+# -------
+style "blueback"
+    {
+#
+# This is in case you want a bitmap overlay
+#
+#          engine "pixmap"
+#            {         
+#                   image
+#                   {
+#                            function =  SHADOW
+#                            file = "background.png"
+#                            border = {0, 0, 0, 0}
+#                            stretch                 = FALSE
+#                    }
+#                    image
+#                    {
+#                            function                = BOX
+#                            recolorable             = TRUE
+#                            state                   = PRELIGHT
+#                            file                    = "background.png"
+#                            border                  = { 0, 0, 0, 0 }
+#                            stretch                 = FALSE
+#                    }
+#                    image
+#                    {
+#                            function                = BOX
+#                            recolorable             = TRUE
+#                            state                   = ACTIVE
+#                            file                    = "hover.png"
+#                            border                  = { 0, 0, 0, 0 }
+#                            stretch                 = FALSE
+#                    }
+#            }
+
+#
+# Background
+#
+	bg[NORMAL]	= "#0D2B3D"	# Same dark as default panel
+	bg[ACTIVE]	= "#091720"
+	bg[PRELIGHT]	= "#16364d"
+
+#
+# Text
+#
+	fg[NORMAL]	= "#f7f7f7"
+	fg[PRELIGHT]	= "#000000"
+	fg[ACTIVE]	= "#000"
+    fg[INSENSITIVE] = "#fff"
+
+}
+widget "whiskermenu-window*" style "blueback"
+
+# -----------
+# Tree Window
+# -----------
+style "bluetree"
+{
+# Background
+   base[NORMAL] = "#FBFBFC"
+
+# Hover Color
+   base[ACTIVE] = "#4084D6"
+
+# Normal Text Color
+   text[NORMAL] = "#3b3e45"
+   
+# Hover Text Color
+   text[ACTIVE] = "#FCFCFC"
+#  	engine "murrine" {
+#		gradient_shades	= { 1.25, 1.1, 0.9, 0.95 }
+#
+#	}
+}
+widget "whiskermenu-window*TreeView*" style "bluetree"
+
+# ----------
+# Search Box
+# ----------
+style "blueentry"
+{
+   base[NORMAL] = "#FBFBFC"
+   base[ACTIVE] = "#FBFBFC"
+   text[NORMAL] = "#3b3e45"
+   text[ACTIVE] = "#FCFCFC"
+engine "murrine" {
+             gradient_shades	= { 1.25, 1.1, 0.9, 0.95 }
+                                   }
+}
+widget "whiskermenu-window*GtkEntry*" style "blueentry"
+
+#widget "whiskermenu-window*Scrollbar*" style "bluetree"

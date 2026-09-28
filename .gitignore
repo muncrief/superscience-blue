@@ -1,0 +1,8 @@
+# .gitignore (SuperScience Blue)
+# Created: 2026-09-28 04:50 | Last change: 2026-09-28 04:50 — first version.
+__pycache__/
+# makepkg build output
+packaging/*/src/
+packaging/*/pkg/
+packaging/*/*.pkg.tar.*
+packaging/*/*.tar.gz

@@ -1,0 +1,21 @@
+# superscience-blue-gtk-theme.install (SuperScience Blue, packaging)
+# Created: 2026-09-28 04:55 | Last change: 2026-09-28 04:55 — first version.
+
+post_install()
+{
+    echo "SuperScience Blue: choose it in your desktop's appearance settings."
+    echo "For libadwaita apps (e.g. Pamac), each user can run:"
+    echo "    superscience-blue-libadwaita enable"
+}
+
+post_upgrade()
+{
+    return 0
+}
+
+pre_remove()
+{
+    echo "SuperScience Blue: users who enabled the libadwaita link can run"
+    echo "    superscience-blue-libadwaita disable"
+    echo "before removal, or delete ~/.config/gtk-4.0/gtk.css afterwards."
+}

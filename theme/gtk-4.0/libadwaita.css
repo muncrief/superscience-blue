@@ -1,0 +1,130 @@
+/* libadwaita.css (SuperScience Blue, gtk-4.0) */
+/* Created: 2026-09-27 22:15 | Last change: 2026-09-27 22:31 — window icon hidden in libadwaita title bars (GTK4 has no window-menu button; the icon was a dead, greyed placeholder). Previous entry: derived dark-variant block added. Previous entry: top bars of libadwaita toolbar views (e.g. pamac) drawn in the headerbar blue. Previous entry: first version: libadwaita 1.9 color
+   variables mapped to the SuperScience Blue GTK3 palette. Linked into
+   ~/.config/gtk-4.0/gtk.css, the only stylesheet libadwaita apps (pamac,
+   GNOME apps) read. Only sets variables, so non-libadwaita GTK4 apps
+   (HandBrake) are unaffected and keep the theme's own focus ring.
+   Replaces the old global "* { outline: none }" rule (backup:
+   ~/.config/gtk-4.0/gtk.css.pre-libadwaita-20260927). Light only. */
+
+:root
+{
+  /* Accent: selection blue from the GTK3 theme */
+  --accent-bg-color: #5294e1;
+  --accent-fg-color: #ffffff;
+  --accent-color: #2679dc;
+
+  /* Window and content views */
+  --window-bg-color: #F5F6F8;
+  --window-fg-color: #3B3E46;
+  --view-bg-color: #FBFBFD;
+  --view-fg-color: #3B3E46;
+
+  /* Headerbar: GTK3 title bar blue */
+  --headerbar-bg-color: #0063B2;
+  --headerbar-fg-color: #ffffff;
+  --headerbar-backdrop-color: #005AA2;
+  --headerbar-border-color: #004f8f;
+  --headerbar-shade-color: rgba(0, 0, 0, 0.15);
+  --headerbar-darker-shade-color: rgba(0, 0, 0, 0.25);
+
+  /* Sidebars */
+  --sidebar-bg-color: #F5F6F8;
+  --sidebar-fg-color: #3B3E46;
+  --sidebar-backdrop-color: #F5F6F8;
+  --sidebar-border-color: #DCDFE4;
+  --secondary-sidebar-bg-color: #F5F6F8;
+  --secondary-sidebar-fg-color: #3B3E46;
+  --secondary-sidebar-backdrop-color: #F5F6F8;
+  --secondary-sidebar-border-color: #DCDFE4;
+
+  /* Cards, dialogs, popovers */
+  --card-bg-color: #FBFBFD;
+  --card-fg-color: #3B3E46;
+  --dialog-bg-color: #F5F6F8;
+  --dialog-fg-color: #3B3E46;
+  --popover-bg-color: #F5F6F8;
+  --popover-fg-color: #3B3E46;
+  --thumbnail-bg-color: #FBFBFD;
+  --thumbnail-fg-color: #3B3E46;
+
+  /* Status colors from the GTK3 theme */
+  --destructive-bg-color: #FC4138;
+  --destructive-fg-color: #ffffff;
+  --destructive-color: #FC4138;
+  --success-bg-color: #73d216;
+  --success-fg-color: #ffffff;
+  --success-color: #4e9a06;
+  --warning-bg-color: #F27835;
+  --warning-fg-color: #ffffff;
+  --warning-color: #c65a1e;
+  --error-bg-color: #FC4138;
+  --error-fg-color: #ffffff;
+  --error-color: #FC4138;
+}
+
+/* Libadwaita makes headerbars inside toolbar views flat (they show the
+   window background). Draw them in the headerbar blue, matching the
+   GTK3 title bars. toolbarview exists only in libadwaita apps, so this
+   does not touch plain GTK4 apps. */
+toolbarview > .top-bar headerbar
+{
+  background-color: var(--headerbar-bg-color);
+  color: var(--headerbar-fg-color);
+}
+
+toolbarview > .top-bar headerbar:backdrop
+{
+  background-color: var(--headerbar-backdrop-color);
+}
+
+/* Window icon in libadwaita title bars. The decoration layout
+   "icon,menu:..." makes GTK3 show a working window-menu button, but GTK4
+   has no menu button and shows only the icon as a dead picture. Shrink it
+   away (GTK CSS has no display: none). Right-clicking the title bar still
+   opens the window menu. */
+toolbarview windowcontrols > .icon
+{
+  margin: 0;
+  min-width: 0;
+  min-height: 0;
+  -gtk-icon-size: 0;
+  opacity: 0;
+}
+
+/* Dark variant, DERIVED by converter/darken.py (greys inverted; blues,
+   status colors and white kept). Used when the system or app asks for
+   dark. A proposal, not an original SuperScience Blue design. */
+@media (prefers-color-scheme: dark)
+{
+  :root
+  {
+    --window-bg-color: #1f2127;
+    --window-fg-color: #aeb2bb;
+    --view-bg-color: #1b1b22;
+    --view-fg-color: #aeb2bb;
+    --headerbar-bg-color: #0063b2;
+    --headerbar-backdrop-color: #005aa2;
+    --sidebar-bg-color: #1f2127;
+    --sidebar-fg-color: #aeb2bb;
+    --sidebar-backdrop-color: #1f2127;
+    --sidebar-border-color: #2f333b;
+    --secondary-sidebar-bg-color: #1f2127;
+    --secondary-sidebar-fg-color: #aeb2bb;
+    --secondary-sidebar-backdrop-color: #1f2127;
+    --secondary-sidebar-border-color: #2f333b;
+    --card-bg-color: #1b1b22;
+    --card-fg-color: #aeb2bb;
+    --dialog-bg-color: #1f2127;
+    --dialog-fg-color: #aeb2bb;
+    --popover-bg-color: #1f2127;
+    --popover-fg-color: #aeb2bb;
+    --thumbnail-bg-color: #1b1b22;
+    --thumbnail-fg-color: #aeb2bb;
+    --destructive-bg-color: #fc4138;
+    --destructive-color: #fc4138;
+    --warning-bg-color: #f27835;
+    --error-bg-color: #fc4138;
+    --error-color: #fc4138;
+  }
+}

@@ -1,0 +1,12 @@
+# index.theme (SuperScience Blue)
+# Created: 2026-09-28 04:25 | Last change: 2026-09-28 04:25 — packaged version; the
+# Arc-only Metacity/icon/cursor lines were dropped (those parts don't ship).
+[Desktop Entry]
+Type=X-GNOME-Metatheme
+Name=SuperScience Blue
+Comment=A clean blue theme for GTK2, GTK3, GTK4/libadwaita and Xfwm4
+Encoding=UTF-8
+
+[X-GNOME-Metatheme]
+GtkTheme=SuperScience Blue
+ButtonLayout=menu:minimize,maximize,close

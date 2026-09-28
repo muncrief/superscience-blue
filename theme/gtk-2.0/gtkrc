@@ -1,0 +1,45 @@
+# Default Background and Text Color for Selection Windows, Text Boxes, Etc.
+gtk-color-scheme = "base_color: #FBFBFC"
+gtk-color-scheme = "text_color: #3b3e45"
+
+# Defult Background and Text Color for Everything Else
+gtk-color-scheme = "bg_color: #f5f6f7"
+gtk-color-scheme = "fg_color: #3b3e45"
+
+# Tooltip Background and Text Colors
+gtk-color-scheme = "tooltip_bg_color: #343434"
+gtk-color-scheme = "tooltip_fg_color: #FEFEFE"
+
+# Selected Item Overlay and Text Color
+gtk-color-scheme = "selected_bg_color: #5294e2"
+gtk-color-scheme = "selected_fg_color: #ffffff"
+
+# Unknown - Should be for "greyed out" stuff but doesn't seem to be
+gtk-color-scheme = "insensitive_bg_color: #fbfcfc"
+
+# This is for inactive "greyed out" stuff
+gtk-color-scheme = "insensitive_fg_color: #a9acb2"
+
+# Unkown
+gtk-color-scheme = "notebook_bg: #ffffff"
+
+# Sidebar background color
+gtk-color-scheme = "dark_sidebar_bg: #353945"
+gtk-color-scheme = "blue_sidebar_bg: #FBFBFC"
+
+# Hyperlink color
+gtk-color-scheme = "link_color: #5294e2"
+
+# Menu Background
+gtk-color-scheme = "menu_bg: #ffffff"
+
+gtk-icon-sizes = "gtk-button=16,16" # This makes button icons smaller.
+gtk-auto-mnemonics = 1
+gtk-primary-button-warps-slider = 1
+
+include "main.rc"
+include "apps.rc"
+include "panel.rc"
+include "xfce-notify.rc"
+include "whiskermenu.rc"
+include "menubar-toolbar/menubar-toolbar.rc"

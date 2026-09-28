@@ -1,0 +1,101 @@
+#!/bin/bash
+#
+# superscience-blue-libadwaita (SuperScience Blue)
+# Created: 2026-09-28 04:30 | Last change: 2026-09-28 04:30 — first version.
+#
+# Turns SuperScience Blue on or off for libadwaita apps, for the user who runs it.
+#
+# libadwaita apps ignore GTK themes. The only way to style them is the per-user
+# file ~/.config/gtk-4.0/gtk.css. This command links that file to the theme's
+# libadwaita.css. It never replaces a gtk.css that isn't its own link.
+#
+# Usage: superscience-blue-libadwaita enable|disable|status
+#
+# Copyright (C) 2026 Robert Muncrief. License: GPL-3.0-or-later.
+#
+set -o nounset
+
+readonly GC_THEME_CSS="/usr/share/themes/SuperScience Blue/gtk-4.0/libadwaita.css"
+readonly GC_CONFIG_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/gtk-4.0"
+readonly GC_LINK="$GC_CONFIG_DIR/gtk.css"
+readonly GC_OURS_SUFFIX="/SuperScience Blue/gtk-4.0/libadwaita.css"
+
+#
+# Function: IsOurLink
+# Output:   returns 0 if GC_LINK is a symlink to a SuperScience Blue libadwaita.css
+#
+IsOurLink()
+{
+    [ -L "$GC_LINK" ] || return 1
+    local l_target
+    l_target="$(readlink "$GC_LINK")"
+    [ "${l_target%"$GC_OURS_SUFFIX"}" != "$l_target" ]
+}
+
+DoStatus()
+{
+    if IsOurLink
+    then
+        echo "Enabled: $GC_LINK -> $(readlink "$GC_LINK")"
+    elif [ -e "$GC_LINK" ] || [ -L "$GC_LINK" ]
+    then
+        echo "Not enabled: $GC_LINK exists but isn't SuperScience Blue's link."
+    else
+        echo "Not enabled."
+    fi
+}
+
+DoEnable()
+{
+    if IsOurLink
+    then
+        echo "Already enabled: $GC_LINK -> $(readlink "$GC_LINK")"
+        return 0
+    fi
+    if [ -e "$GC_LINK" ] || [ -L "$GC_LINK" ]
+    then
+        echo "Not changed: $GC_LINK already exists and isn't SuperScience Blue's link." >&2
+        echo "Move it aside yourself, then run this again." >&2
+        return 1
+    fi
+    if [ ! -f "$GC_THEME_CSS" ]
+    then
+        echo "Theme not installed: $GC_THEME_CSS not found." >&2
+        return 1
+    fi
+    mkdir -p "$GC_CONFIG_DIR" || return 1
+    ln -s "$GC_THEME_CSS" "$GC_LINK" || return 1
+    echo "Enabled: $GC_LINK -> $GC_THEME_CSS"
+    echo "Restart libadwaita apps to see the change."
+}
+
+DoDisable()
+{
+    if IsOurLink
+    then
+        rm "$GC_LINK" || return 1
+        echo "Disabled. libadwaita apps will use their default look after a restart."
+    elif [ -e "$GC_LINK" ] || [ -L "$GC_LINK" ]
+    then
+        echo "Not changed: $GC_LINK isn't SuperScience Blue's link." >&2
+        return 1
+    else
+        echo "Already disabled."
+    fi
+}
+
+if [ "$(id -u)" -eq 0 ]
+then
+    echo "Run this as your normal user, not root. It only changes your own ~/.config." >&2
+    exit 1
+fi
+
+case "${1:-}" in
+    enable)  DoEnable ;;
+    disable) DoDisable ;;
+    status)  DoStatus ;;
+    *)
+        echo "Usage: superscience-blue-libadwaita enable|disable|status" >&2
+        exit 2
+        ;;
+esac
