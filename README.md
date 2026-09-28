@@ -1,5 +1,5 @@
 <!-- README.md (SuperScience Blue) -->
-<!-- Created: 2026-09-28 04:50 | Last change: 2026-09-28 04:50 — first version. -->
+<!-- Created: 2026-09-28 04:50 | Last change: 2026-09-28 05:18 — libadwaita styling is automatic at login. -->
 
 # SuperScience Blue
 
@@ -14,7 +14,7 @@ daily on Xfce.
 | GTK2 | `theme/gtk-2.0` | Needs the murrine engine (see below) |
 | GTK3 | `theme/gtk-3.0` | |
 | GTK4 | `theme/gtk-4.0` | Built from the GTK3 theme by `tools/build.sh` |
-| libadwaita | `theme/gtk-4.0/libadwaita.css` | Per-user opt-in, see below |
+| libadwaita | `theme/gtk-4.0/libadwaita.css` | Applied at login, see below |
 | Xfwm4 | `theme/xfwm4` | Window borders and buttons |
 | Plank | `theme/plank` | Dock theme |
 
@@ -40,10 +40,21 @@ the AUR) and the Adwaita GTK2 engine (Arch: `gnome-themes-extra`).
 
 ## libadwaita apps (GNOME-style apps such as Pamac)
 
-libadwaita apps ignore GTK themes. The only way to style them is a file in
-each user's home folder, `~/.config/gtk-4.0/gtk.css`. A package can't (and
-shouldn't) write into home folders, so this is a separate step, done once by
-each user who wants it:
+libadwaita apps ignore GTK themes. The only file they read is each user's
+`~/.config/gtk-4.0/gtk.css` (GTK fixes that name). A package can't write into
+home folders, so the package installs a small login entry
+(`/etc/xdg/autostart/superscience-blue-libadwaita.desktop`) that does it for
+each user, automatically:
+
+- If SuperScience Blue is your selected theme, it links
+  `~/.config/gtk-4.0/gtk.css` to the theme's `libadwaita.css` at login.
+- If you switch to another theme, it removes that link at your next login.
+- If you already have your own `gtk.css`, it never touches it.
+
+So with the package, just choose SuperScience Blue and log out and back in.
+A theme change reaches libadwaita apps at the next login.
+
+The same thing can be done by hand at any time:
 
 ```
 superscience-blue-libadwaita enable     # use SuperScience Blue colors
@@ -51,12 +62,7 @@ superscience-blue-libadwaita disable    # back to the default look
 superscience-blue-libadwaita status
 ```
 
-It never replaces a `gtk.css` you already have. Restart libadwaita apps after
-changing it. Without it, plain GTK4 apps still use the theme and libadwaita
-apps keep their default look.
-
-If you installed by hand instead of from the package, you can make the link
-yourself:
+If you installed without the package, make the link yourself:
 
 ```
 mkdir -p ~/.config/gtk-4.0

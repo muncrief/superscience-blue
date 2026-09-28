@@ -1,5 +1,6 @@
 # PKGBUILD (SuperScience Blue, packaging/local)
-# Created: 2026-09-28 04:55 | Last change: 2026-09-28 05:20 — maintainer address siflaj@searingtruth.com.
+# Created: 2026-09-28 04:55 | Last change: 2026-09-28 05:15 — installs the login entry that
+# styles libadwaita apps automatically; pkgrel 2.
 # Builds the package from this source tree (for testing before a release).
 # The AUR PKGBUILD installs the same files from a GitHub release instead.
 # Usage, from this folder: makepkg -si
@@ -8,7 +9,7 @@
 
 pkgname=superscience-blue-gtk-theme
 pkgver=1.0.0
-pkgrel=1
+pkgrel=2
 pkgdesc="A clean blue theme for GTK2, GTK3, GTK4/libadwaita and Xfwm4"
 arch=('any')
 url="https://github.com/muncrief/superscience-blue"
@@ -30,5 +31,7 @@ package()
     find "$dest" -type f -exec chmod 644 {} +
 
     install -Dm755 "$root/bin/superscience-blue-libadwaita" "$pkgdir/usr/bin/superscience-blue-libadwaita"
+    install -Dm644 "$root/packaging/superscience-blue-libadwaita.desktop" \
+        "$pkgdir/etc/xdg/autostart/superscience-blue-libadwaita.desktop"
     install -Dm644 "$root/README.md" "$pkgdir/usr/share/doc/$pkgname/README.md"
 }

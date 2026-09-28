@@ -1,24 +1,30 @@
 #!/bin/bash
 #
 # superscience-blue-libadwaita (SuperScience Blue)
-# Created: 2026-09-28 04:30 | Last change: 2026-09-28 04:30 — first version.
+# Created: 2026-09-28 04:30 | Last change: 2026-09-28 05:10 — added "auto", run at
+# every login by /etc/xdg/autostart/superscience-blue-libadwaita.desktop, so
+# libadwaita apps follow the selected theme with no manual step.
 #
 # Turns SuperScience Blue on or off for libadwaita apps, for the user who runs it.
 #
-# libadwaita apps ignore GTK themes. The only way to style them is the per-user
-# file ~/.config/gtk-4.0/gtk.css. This command links that file to the theme's
-# libadwaita.css. It never replaces a gtk.css that isn't its own link.
+# libadwaita apps ignore GTK themes. The only file they read is the per-user
+# ~/.config/gtk-4.0/gtk.css (the name is fixed by GTK). This command makes that
+# file a link to the theme's libadwaita.css. It never replaces a gtk.css that
+# isn't its own link.
 #
-# Usage: superscience-blue-libadwaita enable|disable|status
+# Usage: superscience-blue-libadwaita enable|disable|status|auto
+#   auto: enable if SuperScience Blue is the selected GTK theme, otherwise
+#         remove our link. Does nothing if the selected theme can't be read.
 #
 # Copyright (C) 2026 Robert Muncrief. License: GPL-3.0-or-later.
 #
 set -o nounset
 
-readonly GC_THEME_CSS="/usr/share/themes/SuperScience Blue/gtk-4.0/libadwaita.css"
+readonly GC_THEME_NAME="SuperScience Blue"
+readonly GC_THEME_CSS="/usr/share/themes/$GC_THEME_NAME/gtk-4.0/libadwaita.css"
 readonly GC_CONFIG_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/gtk-4.0"
 readonly GC_LINK="$GC_CONFIG_DIR/gtk.css"
-readonly GC_OURS_SUFFIX="/SuperScience Blue/gtk-4.0/libadwaita.css"
+readonly GC_OURS_SUFFIX="/$GC_THEME_NAME/gtk-4.0/libadwaita.css"
 
 #
 # Function: IsOurLink
@@ -30,6 +36,36 @@ IsOurLink()
     local l_target
     l_target="$(readlink "$GC_LINK")"
     [ "${l_target%"$GC_OURS_SUFFIX"}" != "$l_target" ]
+}
+
+#
+# Function: SelectedTheme
+# Output:   prints the user's selected GTK theme name; returns 1 if unknown.
+#           Xfce keeps it in xfconf; GNOME, Cinnamon, Budgie and MATE in
+#           gsettings; KDE and others write it to gtk-3.0/settings.ini.
+#
+SelectedTheme()
+{
+    local l_name=""
+    case "${XDG_CURRENT_DESKTOP:-}" in
+        *XFCE*)
+            command -v xfconf-query >/dev/null &&
+                l_name="$(xfconf-query -c xsettings -p /Net/ThemeName 2>/dev/null)"
+            ;;
+    esac
+    if [ -z "$l_name" ] && command -v gsettings >/dev/null
+    then
+        l_name="$(gsettings get org.gnome.desktop.interface gtk-theme 2>/dev/null)"
+        l_name="${l_name#\'}"
+        l_name="${l_name%\'}"
+    fi
+    if [ -z "$l_name" ]
+    then
+        l_name="$(sed -n 's/^[[:space:]]*gtk-theme-name[[:space:]]*=[[:space:]]*//p' \
+            "${XDG_CONFIG_HOME:-$HOME/.config}/gtk-3.0/settings.ini" 2>/dev/null | tail -1)"
+    fi
+    [ -n "$l_name" ] || return 1
+    printf '%s\n' "$l_name"
 }
 
 DoStatus()
@@ -84,6 +120,24 @@ DoDisable()
     fi
 }
 
+DoAuto()
+{
+    local l_theme
+    l_theme="$(SelectedTheme)" || return 0
+    if [ "$l_theme" = "$GC_THEME_NAME" ]
+    then
+        # A user's own gtk.css is left alone; only create the link if none exists
+        if ! IsOurLink && [ ! -e "$GC_LINK" ] && [ ! -L "$GC_LINK" ] && [ -f "$GC_THEME_CSS" ]
+        then
+            DoEnable
+        fi
+    elif IsOurLink
+    then
+        DoDisable
+    fi
+    return 0
+}
+
 if [ "$(id -u)" -eq 0 ]
 then
     echo "Run this as your normal user, not root. It only changes your own ~/.config." >&2
@@ -94,8 +148,9 @@ case "${1:-}" in
     enable)  DoEnable ;;
     disable) DoDisable ;;
     status)  DoStatus ;;
+    auto)    DoAuto ;;
     *)
-        echo "Usage: superscience-blue-libadwaita enable|disable|status" >&2
+        echo "Usage: superscience-blue-libadwaita enable|disable|status|auto" >&2
         exit 2
         ;;
 esac

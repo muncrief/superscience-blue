@@ -1,0 +1,12 @@
+# superscience-blue-libadwaita.desktop (SuperScience Blue, packaging)
+# Created: 2026-09-28 05:10 | Last change: 2026-09-28 05:10 — first version.
+# Installed to /etc/xdg/autostart. At each login, makes libadwaita apps follow
+# the selected theme (see superscience-blue-libadwaita "auto").
+[Desktop Entry]
+Type=Application
+Name=SuperScience Blue for libadwaita apps
+Comment=Styles libadwaita apps when SuperScience Blue is the selected theme
+Exec=/usr/bin/superscience-blue-libadwaita auto
+NoDisplay=true
+Terminal=false
+X-GNOME-Autostart-enabled=true
