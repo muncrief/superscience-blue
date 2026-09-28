@@ -1,5 +1,5 @@
 # PKGBUILD (SuperScience Blue, packaging/local)
-# Created: 2026-09-28 04:55 | Last change: 2026-09-28 05:00 — clear setgid on installed folders.
+# Created: 2026-09-28 04:55 | Last change: 2026-09-28 05:20 — maintainer address siflaj@searingtruth.com.
 # Builds the package from this source tree (for testing before a release).
 # The AUR PKGBUILD installs the same files from a GitHub release instead.
 # Usage, from this folder: makepkg -si
