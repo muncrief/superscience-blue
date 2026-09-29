@@ -1,11 +1,13 @@
 <!-- README.md (SuperScience Blue) -->
-<!-- Created: 2026-09-28 04:50 | Last change: 2026-09-29 12:49 — credit AI assistance on the GTK4 port and packaging. -->
+<!-- Created: 2026-09-28 04:50 | Last change: 2026-09-29 15:20 — full-desktop screenshot, "Get the full look", wallpaper credit. -->
 
 # SuperScience Blue
 
 A clean, light blue desktop theme for Linux, covering GTK2, GTK3, GTK4
 (including libadwaita apps) and the Xfwm4 window manager. Developed and used
 daily on Xfce.
+
+![SuperScience Blue on an Xfce desktop: Thunar and the terminal (GTK3), Pamac (libadwaita), the Whisker menu and the panel](screenshots/desktop.png)
 
 ![Xfwm4 window over a GTK3 app](screenshots/overlap-xfwm4.png)
 
@@ -21,6 +23,23 @@ daily on Xfce.
 | libadwaita | `theme/gtk-4.0/libadwaita.css` | Applied at login, see below |
 | Xfwm4 | `theme/xfwm4` | Window borders and buttons |
 | Plank | `theme/plank` | Dock theme |
+
+## Get the full look
+
+The screenshot above also uses these settings, which are not part of the
+theme itself:
+
+- **Icons:** Flat-Remix-Blue-Light-darkPanel (Arch: `flat-remix`).
+- **Fonts:** Sans 10, Monospace 10; window titles Sans Bold 9, centered.
+- **Panel:** at the bottom, 40 px, full width, 80% opacity; its background
+  comes from the theme.
+- **Whisker menu:** 80% opacity, with categories, commands and search at
+  their alternate positions (Properties → Appearance).
+- **Terminal (xfce4-terminal):** transparent background at 0.80 darkness,
+  background `#0d2b3d`, text `#ffffff`, Tango palette, Monospace 14.
+- **Window manager (Xfwm4):** compositing on, window shadows at 50%, windows
+  80% opaque while moving or resizing.
+- **Wallpaper:** cropped from "Blue Kodaikanal" (see Credits).
 
 ## Install
 
@@ -111,6 +130,12 @@ years. It started from other free themes, and parts of them remain:
 
 The GTK4 and libadwaita versions were ported from the GTK3 theme in 2026.
 The GTK4 port and the packaging were developed with AI assistance (Claude).
+
+The wallpaper in the desktop screenshot is cropped from
+["Blue Kodaikanal"](https://commons.wikimedia.org/wiki/File:Blue_Kodaikanal.jpg)
+by Silvershocky, licensed
+[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/). It is not
+included in the theme.
 
 ## License
 
