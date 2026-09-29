@@ -1,5 +1,5 @@
 # PKGBUILD (SuperScience Blue, packaging/local)
-# Created: 2026-09-28 04:55 | Last change: 2026-09-29 16:02 — 1.0.1: unfocused libadwaita header bars stay solid blue.
+# Created: 2026-09-28 04:55 | Last change: 2026-09-29 16:39 — 1.1.0: adds the SuperScience Blue-Dark theme.
 # styles libadwaita apps automatically; pkgrel 2.
 # Builds the package from this source tree (for testing before a release).
 # The AUR PKGBUILD installs the same files from a GitHub release instead.
@@ -8,9 +8,9 @@
 # Maintainer: Robert Muncrief <siflaj@searingtruth.com>
 
 pkgname=superscience-blue-gtk-theme
-pkgver=1.0.1
+pkgver=1.1.0
 pkgrel=1
-pkgdesc="A clean blue theme for GTK2, GTK3, GTK4/libadwaita and Xfwm4"
+pkgdesc="A clean blue theme for GTK2, GTK3, GTK4/libadwaita and Xfwm4, with a dark variant"
 arch=('any')
 url="https://github.com/muncrief/superscience-blue"
 license=('GPL-3.0-or-later')
@@ -26,9 +26,17 @@ package()
 
     install -d "$dest"
     cp -r --no-preserve=mode,ownership "$root/theme/." "$dest/"
+
+    # SuperScience Blue-Dark: its own GTK3/GTK4 files; window borders and dock
+    # are the same as the light theme's, so they are links to it
+    local dark="$pkgdir/usr/share/themes/SuperScience Blue-Dark"
+    install -d "$dark"
+    cp -r --no-preserve=mode,ownership "$root/theme-dark/." "$dark/"
+    ln -s "../SuperScience Blue/xfwm4" "$dark/xfwm4"
+    ln -s "../SuperScience Blue/plank" "$dark/plank"
     # g-s: the source folders may be setgid (they are in Storage); installed ones mustn't be
-    find "$dest" -type d -exec chmod u=rwx,go=rx,g-s {} +
-    find "$dest" -type f -exec chmod 644 {} +
+    find "$dest" "$dark" -type d -exec chmod u=rwx,go=rx,g-s {} +
+    find "$dest" "$dark" -type f -exec chmod 644 {} +
 
     install -Dm755 "$root/bin/superscience-blue-libadwaita" "$pkgdir/usr/bin/superscience-blue-libadwaita"
     install -Dm644 "$root/packaging/superscience-blue-libadwaita.desktop" \
