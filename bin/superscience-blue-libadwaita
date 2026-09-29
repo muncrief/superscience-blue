@@ -1,9 +1,10 @@
 #!/bin/bash
 #
 # superscience-blue-libadwaita (SuperScience Blue)
-# Created: 2026-09-28 04:30 | Last change: 2026-09-28 05:10 — added "auto", run at
-# every login by /etc/xdg/autostart/superscience-blue-libadwaita.desktop, so
-# libadwaita apps follow the selected theme with no manual step.
+# Created: 2026-09-28 04:30 | Last change: 2026-09-29 16:38 — "auto" also enables for
+# SuperScience Blue-Dark (same libadwaita.css; its dark block applies when the
+# desktop asks for dark). Previous entry: added "auto", run at every login by
+# /etc/xdg/autostart/superscience-blue-libadwaita.desktop.
 #
 # Turns SuperScience Blue on or off for libadwaita apps, for the user who runs it.
 #
@@ -13,8 +14,9 @@
 # isn't its own link.
 #
 # Usage: superscience-blue-libadwaita enable|disable|status|auto
-#   auto: enable if SuperScience Blue is the selected GTK theme, otherwise
-#         remove our link. Does nothing if the selected theme can't be read.
+#   auto: enable if SuperScience Blue or SuperScience Blue-Dark is the
+#         selected GTK theme, otherwise remove our link. Does nothing if the
+#         selected theme can't be read.
 #
 # Copyright (C) 2026 Robert Muncrief. License: GPL-3.0-or-later.
 #
@@ -124,7 +126,7 @@ DoAuto()
 {
     local l_theme
     l_theme="$(SelectedTheme)" || return 0
-    if [ "$l_theme" = "$GC_THEME_NAME" ]
+    if [ "$l_theme" = "$GC_THEME_NAME" ] || [ "$l_theme" = "$GC_THEME_NAME-Dark" ]
     then
         # A user's own gtk.css is left alone; only create the link if none exists
         if ! IsOurLink && [ ! -e "$GC_LINK" ] && [ ! -L "$GC_LINK" ] && [ -f "$GC_THEME_CSS" ]
