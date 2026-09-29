@@ -1,0 +1,13 @@
+# index.theme (SuperScience Blue-Dark)
+# Created: 2026-09-29 16:37 | Last change: 2026-09-29 16:37 — first version. The
+# "-Dark" suffix is deliberate: Xfce 4.20 switches apps to dark mode
+# (color-scheme prefer-dark) when the theme name ends in "-dark".
+[Desktop Entry]
+Type=X-GNOME-Metatheme
+Name=SuperScience Blue-Dark
+Comment=The dark variant of SuperScience Blue for GTK3, GTK4/libadwaita and Xfwm4
+Encoding=UTF-8
+
+[X-GNOME-Metatheme]
+GtkTheme=SuperScience Blue-Dark
+ButtonLayout=menu:minimize,maximize,close
