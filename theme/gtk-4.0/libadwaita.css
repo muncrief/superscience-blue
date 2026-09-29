@@ -1,5 +1,5 @@
 /* libadwaita.css (SuperScience Blue, gtk-4.0) */
-/* Created: 2026-09-27 22:15 | Last change: 2026-09-27 22:31 — window icon hidden in libadwaita title bars (GTK4 has no window-menu button; the icon was a dead, greyed placeholder). Previous entry: derived dark-variant block added. Previous entry: top bars of libadwaita toolbar views (e.g. pamac) drawn in the headerbar blue. Previous entry: first version: libadwaita 1.9 color
+/* Created: 2026-09-27 22:15 | Last change: 2026-09-29 15:47 — unfocused libadwaita top bars no longer fade to 50% opacity: they stay solid backdrop blue and only the title text dims (#93ADC9, the Xfwm4 inactive title color). Previous entry: window icon hidden in libadwaita title bars (GTK4 has no window-menu button; the icon was a dead, greyed placeholder). Previous entry: derived dark-variant block added. Previous entry: top bars of libadwaita toolbar views (e.g. pamac) drawn in the headerbar blue. Previous entry: first version: libadwaita 1.9 color
    variables mapped to the SuperScience Blue GTK3 palette. Linked into
    ~/.config/gtk-4.0/gtk.css, the only stylesheet libadwaita apps (pamac,
    GNOME apps) read. Only sets variables, so non-libadwaita GTK4 apps
@@ -76,6 +76,18 @@ toolbarview > .top-bar headerbar
 toolbarview > .top-bar headerbar:backdrop
 {
   background-color: var(--headerbar-backdrop-color);
+  color: #93ADC9;
+}
+
+/* Unfocused windows: libadwaita fades the whole top bar to 50% opacity
+   (toolbarview > .top-bar:backdrop > windowhandle), which washed the blue
+   out to a pale #7aa8cd. Every other SuperScience Blue title bar stays
+   solid when unfocused, so keep this one solid too; the dimmed title
+   text above is the unfocused cue, as in Xfwm4. */
+toolbarview > .top-bar:backdrop > windowhandle,
+toolbarview > .bottom-bar:backdrop > windowhandle
+{
+  filter: none;
 }
 
 /* Window icon in libadwaita title bars. The decoration layout

@@ -1,5 +1,5 @@
 # PKGBUILD (SuperScience Blue, packaging/local)
-# Created: 2026-09-28 04:55 | Last change: 2026-09-28 05:45 — .install now shared from packaging/aur/.
+# Created: 2026-09-28 04:55 | Last change: 2026-09-29 16:02 — 1.0.1: unfocused libadwaita header bars stay solid blue.
 # styles libadwaita apps automatically; pkgrel 2.
 # Builds the package from this source tree (for testing before a release).
 # The AUR PKGBUILD installs the same files from a GitHub release instead.
@@ -8,8 +8,8 @@
 # Maintainer: Robert Muncrief <siflaj@searingtruth.com>
 
 pkgname=superscience-blue-gtk-theme
-pkgver=1.0.0
-pkgrel=2
+pkgver=1.0.1
+pkgrel=1
 pkgdesc="A clean blue theme for GTK2, GTK3, GTK4/libadwaita and Xfwm4"
 arch=('any')
 url="https://github.com/muncrief/superscience-blue"
