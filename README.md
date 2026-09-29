@@ -1,5 +1,5 @@
 <!-- README.md (SuperScience Blue) -->
-<!-- Created: 2026-09-28 04:50 | Last change: 2026-09-28 05:55 — install from GitHub until the AUR package exists. -->
+<!-- Created: 2026-09-28 04:50 | Last change: 2026-09-29 12:49 — credit AI assistance on the GTK4 port and packaging. -->
 
 # SuperScience Blue
 
@@ -110,6 +110,7 @@ years. It started from other free themes, and parts of them remain:
   original basis of the Xfwm4 theme.
 
 The GTK4 and libadwaita versions were ported from the GTK3 theme in 2026.
+The GTK4 port and the packaging were developed with AI assistance (Claude).
 
 ## License
 
