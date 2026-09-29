@@ -1,5 +1,5 @@
 # darken.py (SuperScience Blue, tools)
-# Created: 2026-09-27 | Last change: 2026-09-28 04:40 — header + license line added for publishing.
+# Created: 2026-09-27 | Last change: 2026-09-29 16:35 — very pale tints (chroma under 10%) count as grey: HLS saturation is unstable near white. Previous entry: main code moved under __main__ so darken_images.py can import dark_rgb().
 # SPDX-License-Identifier: GPL-3.0-or-later
 """Derive the dark variant of SuperScience Blue from the light stylesheet.
 Neutral (grey) colors have their lightness inverted into a dark range;
@@ -8,7 +8,8 @@ shadows are kept. Usage: darken.py light.css dark.css"""
 import re, sys, colorsys
 def dark_rgb(r,g,b):
     h,l,s=colorsys.rgb_to_hls(r/255,g/255,b/255)
-    if (r,g,b)==(255,255,255) or l<0.06 or s>0.35: return (r,g,b)
+    chroma=(max(r,g,b)-min(r,g,b))/255
+    if (r,g,b)==(255,255,255) or l<0.06 or (s>0.35 and chroma>0.10): return (r,g,b)
     l2=0.11+(1-l)*0.80
     s2=min(s,0.12)
     rr,gg,bb=colorsys.hls_to_rgb(h,l2,s2)
@@ -25,8 +26,10 @@ def rgbrep(m):
     except ValueError: return m.group(0)
     r,g,b=dark_rgb(r,g,b)
     return f"{f}({r}, {g}, {b}{', '+args[3] if len(args)>3 else ''})"
-src=open(sys.argv[1]).read()
-body=src.split('*/',2)
-out=re.sub(r'#([0-9a-fA-F]{3,8})\b(?![\w-])',hexrep,src)
-out=re.sub(r'\b(rgba?)\(\s*([\d.\s,]+)\)',rgbrep,out)
-open(sys.argv[2],'w').write(out)
+def main():
+    src=open(sys.argv[1]).read()
+    out=re.sub(r'#([0-9a-fA-F]{3,8})\b(?![\w-])',hexrep,src)
+    out=re.sub(r'\b(rgba?)\(\s*([\d.\s,]+)\)',rgbrep,out)
+    open(sys.argv[2],'w').write(out)
+if __name__=="__main__":
+    main()
