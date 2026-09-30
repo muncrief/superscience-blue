@@ -1,5 +1,5 @@
 <!-- README.md (SuperScience Blue) -->
-<!-- Created: 2026-09-28 04:50 | Last change: 2026-09-29 18:26 — 1.1.0: SuperScience Blue-Dark (dark mode section, dark screenshot, tools). -->
+<!-- Created: 2026-09-28 04:50 | Last change: 2026-09-29 19:28 — current for 1.1.1: AUR install, manual dark install, light/dark switching, credits. -->
 
 # SuperScience Blue
 
@@ -29,7 +29,7 @@ SuperScience Blue-Dark. Developed and used daily on Xfce.
 
 ## Get the full look
 
-The screenshot above also uses these settings, which are not part of the
+The screenshots above also use these settings, which are not part of the
 theme itself:
 
 - **Icons:** Flat-Remix-Blue-Light-darkPanel (Arch: `flat-remix`).
@@ -64,14 +64,23 @@ graph in Virtual Machine Manager) keep the old colors until they are reopened.
 
 ### Arch Linux
 
-The AUR package `superscience-blue-gtk-theme` is coming soon. Until then,
-build the same package directly from this repository:
+Install the AUR package
+[superscience-blue-gtk-theme](https://aur.archlinux.org/packages/superscience-blue-gtk-theme)
+with an AUR helper, for example:
 
 ```
-git clone https://github.com/muncrief/superscience-blue
-cd superscience-blue/packaging/aur
+paru -S superscience-blue-gtk-theme
+```
+
+or without a helper:
+
+```
+git clone https://aur.archlinux.org/superscience-blue-gtk-theme.git
+cd superscience-blue-gtk-theme
 makepkg -si
 ```
+
+It installs both themes, SuperScience Blue and SuperScience Blue-Dark.
 
 ### Other distributions
 
@@ -79,6 +88,16 @@ Copy the contents of `theme/` to `/usr/share/themes/SuperScience Blue/`
 (for all users) or `~/.local/share/themes/SuperScience Blue/` (for yourself),
 then choose "SuperScience Blue" in your desktop's appearance settings
 (Xfce: Settings → Appearance and Settings → Window Manager).
+
+For the dark theme, copy the contents of `theme-dark/` to
+`SuperScience Blue-Dark/` next to it, and link its window borders and dock
+theme to the light theme's:
+
+```
+cd "/usr/share/themes/SuperScience Blue-Dark"
+ln -s "../SuperScience Blue/xfwm4" xfwm4
+ln -s "../SuperScience Blue/plank" plank
+```
 
 For GTK2 apps, install the murrine engine (Arch: `gtk-engine-murrine` from
 the AUR) and the Adwaita GTK2 engine (Arch: `gnome-themes-extra`).
@@ -97,8 +116,9 @@ each user, automatically:
 - If you already have your own `gtk.css`, it never touches it.
 
 So with the package, just choose SuperScience Blue (or SuperScience Blue-Dark)
-and log out and back in.
-A theme change reaches libadwaita apps at the next login.
+and log out and back in. Switching to SuperScience Blue from another theme
+reaches libadwaita apps at the next login; switching between SuperScience Blue
+and SuperScience Blue-Dark needs no login, only reopening the apps.
 
 The same thing can be done by hand at any time:
 
@@ -140,12 +160,13 @@ You're welcome to. Everything needed is in this repository:
 
 To try a change without installing, run an app with
 `GTK_THEME="SuperScience Blue" <app>` after copying `theme/` to
-`~/.local/share/themes/SuperScience Blue/`.
+`~/.local/share/themes/SuperScience Blue/` (for the dark theme:
+`GTK_THEME="SuperScience Blue-Dark"` and `theme-dark/`).
 
 ## Credits
 
-SuperScience Blue is by Robert Muncrief, developed and refined over many
-years. It started from other free themes, and parts of them remain:
+SuperScience Blue is by Robert Muncrief (LightYear Designs), developed and
+refined over many years. It started from other free themes, and parts of them remain:
 
 - **Arc** by horst3180 (GPL-3.0) — the original basis of the GTK2 and GTK3
   themes, including many of their images.
@@ -154,10 +175,11 @@ years. It started from other free themes, and parts of them remain:
   (Shimmer Project), itself based on **Axiom** by Rogier Koppejan — the
   original basis of the Xfwm4 theme.
 
-The GTK4 and libadwaita versions were ported from the GTK3 theme in 2026.
-The GTK4 port and the packaging were developed with AI assistance (Claude).
+The GTK4 and libadwaita versions were ported from the GTK3 theme in 2026, and
+the dark variant was added the same year. The GTK4 port, the dark variant and
+the packaging were developed with AI assistance (Claude).
 
-The wallpaper in the desktop screenshot is cropped from
+The wallpaper in the desktop screenshots is cropped from
 ["Blue Kodaikanal"](https://commons.wikimedia.org/wiki/File:Blue_Kodaikanal.jpg)
 by Silvershocky, licensed
 [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/). It is not
