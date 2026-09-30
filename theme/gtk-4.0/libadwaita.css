@@ -1,5 +1,5 @@
 /* libadwaita.css (SuperScience Blue, gtk-4.0) */
-/* Created: 2026-09-27 22:15 | Last change: 2026-09-29 15:47 — unfocused libadwaita top bars no longer fade to 50% opacity: they stay solid backdrop blue and only the title text dims (#93ADC9, the Xfwm4 inactive title color). Previous entry: window icon hidden in libadwaita title bars (GTK4 has no window-menu button; the icon was a dead, greyed placeholder). Previous entry: derived dark-variant block added. Previous entry: top bars of libadwaita toolbar views (e.g. pamac) drawn in the headerbar blue. Previous entry: first version: libadwaita 1.9 color
+/* Created: 2026-09-27 22:15 | Last change: 2026-09-29 18:37 — header text #F1F1F1 (was #ffffff), the Xfwm4 active title color, so libadwaita and window-manager title bars match. Previous entry: unfocused libadwaita top bars no longer fade to 50% opacity: they stay solid backdrop blue and only the title text dims (#93ADC9, the Xfwm4 inactive title color). Previous entry: window icon hidden in libadwaita title bars (GTK4 has no window-menu button; the icon was a dead, greyed placeholder). Previous entry: derived dark-variant block added. Previous entry: top bars of libadwaita toolbar views (e.g. pamac) drawn in the headerbar blue. Previous entry: first version: libadwaita 1.9 color
    variables mapped to the SuperScience Blue GTK3 palette. Linked into
    ~/.config/gtk-4.0/gtk.css, the only stylesheet libadwaita apps (pamac,
    GNOME apps) read. Only sets variables, so non-libadwaita GTK4 apps
@@ -22,7 +22,7 @@
 
   /* Headerbar: GTK3 title bar blue */
   --headerbar-bg-color: #0063B2;
-  --headerbar-fg-color: #ffffff;
+  --headerbar-fg-color: #F1F1F1;   /* Xfwm4 active_text_color */
   --headerbar-backdrop-color: #005AA2;
   --headerbar-border-color: #004f8f;
   --headerbar-shade-color: rgba(0, 0, 0, 0.15);

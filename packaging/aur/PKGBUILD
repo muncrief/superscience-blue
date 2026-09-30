@@ -1,12 +1,12 @@
 # PKGBUILD (SuperScience Blue, packaging/aur)
-# Created: 2026-09-28 05:45 | Last change: 2026-09-29 16:39 — 1.1.0: adds the SuperScience Blue-Dark theme.
+# Created: 2026-09-28 05:45 | Last change: 2026-09-29 18:37 — 1.1.1: libadwaita header text matches the Xfwm4 title color.
 # The AUR package: installs the theme from a GitHub release. packaging/local/PKGBUILD
 # installs the same files from the working tree, for testing before a release.
 #
 # Maintainer: Robert Muncrief <siflaj@searingtruth.com>
 
 pkgname=superscience-blue-gtk-theme
-pkgver=1.1.0
+pkgver=1.1.1
 pkgrel=1
 pkgdesc="A clean blue theme for GTK2, GTK3, GTK4/libadwaita and Xfwm4, with a dark variant"
 arch=('any')
