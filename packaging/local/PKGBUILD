@@ -1,11 +1,11 @@
 # PKGBUILD (SuperScience Blue, packaging/local)
-# Created: 2026-09-28 04:55 | Last change: 2026-09-29 18:37 — 1.1.1: libadwaita header text matches the Xfwm4 title color.
+# Created: 2026-09-28 04:55 | Last change: 2026-09-29 19:08 — maintainer address linux-dev@lightyeardesigns.com (LightYear Designs).
 # styles libadwaita apps automatically; pkgrel 2.
 # Builds the package from this source tree (for testing before a release).
 # The AUR PKGBUILD installs the same files from a GitHub release instead.
 # Usage, from this folder: makepkg -si
 #
-# Maintainer: Robert Muncrief <siflaj@searingtruth.com>
+# Maintainer: Robert Muncrief <linux-dev@lightyeardesigns.com>
 
 pkgname=superscience-blue-gtk-theme
 pkgver=1.1.1
