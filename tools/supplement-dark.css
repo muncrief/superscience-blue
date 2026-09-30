@@ -1,0 +1,16 @@
+/* supplement-dark.css (SuperScience Blue, tools) */
+/* Created: 2026-09-29 16:54 | Last change: 2026-09-29 17:08 — comment corrected: the cause was the preview, not the theme. Appended to theme-dark/gtk-3.0/gtk.css by build.sh. */
+/* SPDX-License-Identifier: GPL-3.0-or-later */
+
+/* Hand-written additions to the DERIVED dark GTK3 stylesheet.
+   Whisker menu: sets its labels to the light-theme text color directly.
+   Added when its text looked dark in a preview; the real cause turned out
+   to be the preview itself (the running panel had not reloaded the theme),
+   so this rule is probably unnecessary. To test: remove it, rebuild, and
+   check the Whisker menu after a real theme switch. */
+#whiskermenu-window label,
+#whiskermenu-window button label,
+#whiskermenu-window radiobutton label
+{
+  color: #F3F3F5;
+}
