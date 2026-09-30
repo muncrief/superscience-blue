@@ -1,13 +1,15 @@
 <!-- README.md (SuperScience Blue) -->
-<!-- Created: 2026-09-28 04:50 | Last change: 2026-09-29 15:20 — full-desktop screenshot, "Get the full look", wallpaper credit. -->
+<!-- Created: 2026-09-28 04:50 | Last change: 2026-09-29 18:26 — 1.1.0: SuperScience Blue-Dark (dark mode section, dark screenshot, tools). -->
 
 # SuperScience Blue
 
 A clean, light blue desktop theme for Linux, covering GTK2, GTK3, GTK4
-(including libadwaita apps) and the Xfwm4 window manager. Developed and used
-daily on Xfce.
+(including libadwaita apps) and the Xfwm4 window manager, with a dark variant,
+SuperScience Blue-Dark. Developed and used daily on Xfce.
 
 ![SuperScience Blue on an Xfce desktop: Thunar and the terminal (GTK3), Pamac (libadwaita), the Whisker menu and the panel](screenshots/desktop.png)
+
+![SuperScience Blue-Dark: the same desktop in dark mode](screenshots/desktop-dark.png)
 
 ![Xfwm4 window over a GTK3 app](screenshots/overlap-xfwm4.png)
 
@@ -23,6 +25,7 @@ daily on Xfce.
 | libadwaita | `theme/gtk-4.0/libadwaita.css` | Applied at login, see below |
 | Xfwm4 | `theme/xfwm4` | Window borders and buttons |
 | Plank | `theme/plank` | Dock theme |
+| Dark variant | `theme-dark` | SuperScience Blue-Dark: GTK3 and GTK4; shares the Xfwm4 and Plank themes |
 
 ## Get the full look
 
@@ -40,6 +43,22 @@ theme itself:
 - **Window manager (Xfwm4):** compositing on, window shadows at 50%, windows
   80% opaque while moving or resizing.
 - **Wallpaper:** cropped from "Blue Kodaikanal" (see Credits).
+
+## Dark mode
+
+The package installs two themes: **SuperScience Blue** and
+**SuperScience Blue-Dark**. Choose either in your desktop's appearance
+settings (Xfce: Settings → Appearance). The window borders stay the same blue
+in both.
+
+In the dark theme, window contents are dark with light text; the blue title
+bars, menu bars, panel and Whisker menu keep the light theme's colors. On
+Xfce 4.20, choosing SuperScience Blue-Dark in Appearance also switches
+libadwaita apps (such as Pamac) to dark; the "-Dark" at the end of the name is
+what tells Xfce it is a dark theme.
+
+A few apps that draw parts of their windows themselves (for example the CPU
+graph in Virtual Machine Manager) keep the old colors until they are reopened.
 
 ## Install
 
@@ -77,7 +96,8 @@ each user, automatically:
 - If you switch to another theme, it removes that link at your next login.
 - If you already have your own `gtk.css`, it never touches it.
 
-So with the package, just choose SuperScience Blue and log out and back in.
+So with the package, just choose SuperScience Blue (or SuperScience Blue-Dark)
+and log out and back in.
 A theme change reaches libadwaita apps at the next login.
 
 The same thing can be done by hand at any time:
@@ -100,16 +120,22 @@ ln -s "/usr/share/themes/SuperScience Blue/gtk-4.0/libadwaita.css" ~/.config/gtk
 You're welcome to. Everything needed is in this repository:
 
 - `theme/` — the theme exactly as installed.
-- `tools/` — the tools that generate the GTK4 theme from the GTK3 one:
+- `theme-dark/` — SuperScience Blue-Dark exactly as installed (its Xfwm4 and
+  Plank themes are links to the light theme's, made by the package).
+- `tools/` — the tools that generate the GTK4 theme and the dark theme:
   - `build.sh` — rebuilds `theme/gtk-4.0/gtk.css` from `theme/gtk-3.0/gtk.css`
-    plus `tools/supplement.css`, and checks the result with GTK4's own CSS
+    plus `tools/supplement.css`, and all of `theme-dark/` except its
+    `index.theme`, then checks the GTK4 stylesheets with GTK4's own CSS
     parser. Run it after changing the GTK3 stylesheet. Needs `python3`,
-    `python-gobject` and `gtk4`.
+    `python-gobject`, `python-pillow` and `gtk4`.
   - `convert.py` / `cssparse.py` — the GTK3 → GTK4 conversion.
   - `supplement.css` — GTK4-only widgets and color names.
   - `csscheck.py` — parses a stylesheet with GTK4 and reports errors.
-  - `darken.py` and `proposals/gtk-dark.css` — an experimental dark variant.
-    It is not installed and not yet finished.
+  - `darken.py` — derives the dark stylesheets: greys become dark, blues and
+    status colors stay, and areas that are already dark or blue in the light
+    theme keep their colors.
+  - `darken_images.py` — applies the same rule to the checkbox, radio,
+    switch and border images.
 - `theme/gtk-4.0/libadwaita.css` is written by hand.
 
 To try a change without installing, run an app with
