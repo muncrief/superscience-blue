@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 # build.sh (SuperScience Blue, tools)
-# Created: 2026-09-27 22:25 | Last change: 2026-09-29 16:54 — dark GTK3 gets supplement-dark.css appended.
+# Created: 2026-09-27 22:25 | Last change: 2026-09-29 17:16 — supplement-dark.css removed (not needed).
 # Previous entry: builds the dark
 # theme (theme-dark/: gtk-3.0 and gtk-4.0 stylesheets and images) instead of
 # the old tools/proposals/gtk-dark.css; files are only rewritten when their
@@ -9,7 +9,7 @@
 #
 # Rebuilds:
 #   theme/gtk-4.0/gtk.css           from theme/gtk-3.0/gtk.css + supplement.css
-#   theme-dark/gtk-3.0/gtk.css      darken.py of theme/gtk-3.0/gtk.css + supplement-dark.css
+#   theme-dark/gtk-3.0/gtk.css      darken.py of theme/gtk-3.0/gtk.css
 #   theme-dark/gtk-4.0/gtk.css      darken.py of theme/gtk-4.0/gtk.css
 #   theme-dark/gtk-*/assets, borders  darken_images.py of the light images
 # then checks the GTK4 stylesheets and theme/gtk-4.0/libadwaita.css with GTK4's
@@ -61,9 +61,8 @@ write_css "$LIGHT/gtk-4.0/gtk.css" "2026-09-27 21:53" \
 
 # Dark stylesheets, DERIVED from the light ones by darken.py
 python3 "$HERE/darken.py" "$LIGHT/gtk-3.0/gtk.css" "$TMP/dark3.css"
-cat "$HERE/supplement-dark.css" >> "$TMP/dark3.css"
 write_css "$DARK/gtk-3.0/gtk.css" "2026-09-29 16:37" \
-    "rebuilt by tools/build.sh: DERIVED from theme/gtk-3.0/gtk.css by darken.py, + supplement-dark.css." "$TMP/dark3.css"
+    "rebuilt by tools/build.sh: DERIVED from theme/gtk-3.0/gtk.css by darken.py." "$TMP/dark3.css"
 python3 "$HERE/darken.py" "$TMP/gtk4.css" "$TMP/dark4.css"
 write_css "$DARK/gtk-4.0/gtk.css" "2026-09-27 22:23" \
     "rebuilt by tools/build.sh: DERIVED from theme/gtk-4.0/gtk.css by darken.py." "$TMP/dark4.css"
