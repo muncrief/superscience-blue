@@ -1,5 +1,5 @@
 <!-- README.md (SuperScience Blue) -->
-<!-- Created: 2026-09-28 04:50 | Last change: 2026-09-29 19:28 — current for 1.1.1: AUR install, manual dark install, light/dark switching, credits. -->
+<!-- Created: 2026-09-28 04:50 | Last change: 2026-09-29 19:56 — only the light and dark desktop screenshots, captioned. -->
 
 # SuperScience Blue
 
@@ -7,13 +7,13 @@ A clean, light blue desktop theme for Linux, covering GTK2, GTK3, GTK4
 (including libadwaita apps) and the Xfwm4 window manager, with a dark variant,
 SuperScience Blue-Dark. Developed and used daily on Xfce.
 
-![SuperScience Blue on an Xfce desktop: Thunar and the terminal (GTK3), Pamac (libadwaita), the Whisker menu and the panel](screenshots/desktop.png)
+**Light — SuperScience Blue**
+
+![SuperScience Blue on an Xfce desktop: Thunar and the terminal (GTK3), HandBrake (GTK4), Pamac (libadwaita), the Whisker menu and the panel](screenshots/desktop.png)
+
+**Dark — SuperScience Blue-Dark**
 
 ![SuperScience Blue-Dark: the same desktop in dark mode](screenshots/desktop-dark.png)
-
-![Xfwm4 window over a GTK3 app](screenshots/overlap-xfwm4.png)
-
-![A libadwaita app (Pamac)](screenshots/pamac-1.png)
 
 ## What's included
 
